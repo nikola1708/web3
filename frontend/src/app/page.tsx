@@ -134,7 +134,7 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1>🐰 Bunny</h1>
+      <h1>Bunny</h1>
       <p className="subtitle">Digital Heartbeat for Writers — Prove your work is human-authored</p>
 
       <div className="tabs">
