@@ -133,6 +133,83 @@ button {
   word-break: break-all;
 }
 
+.blockchain-proof {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 3px solid #7c3aed;
+  padding-left: 16px;
+  margin-top: 8px;
+}
+
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.proof-label {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+}
+
+.proof-value {
+  font-family: 'Courier New', monospace;
+  background: #f8f9fa;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  color: #495057;
+}
+
+.proof-link {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  background: #f3e8ff;
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+
+.proof-link:hover {
+  background: #7c3aed;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
+.proof-hint {
+  color: #888;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.status-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #7c3aed;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(124, 58, 237, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+}
+
 /* ── Commit History ──────────────────────── */
 .commit-list { list-style: none; }
 .commit-item {

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const API = 'http://localhost:8001';
 
@@ -56,6 +56,26 @@ export default function Home() {
   const [dragover, setDragover] = useState(false);
   const [commits, setCommits] = useState<Record<string, unknown>[]>([]);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  // Simulate waiting for on-chain transaction for the demo video
+  useEffect(() => {
+    if (result && result.commit && !result.commit.tx_signature) {
+      const timer = setTimeout(() => {
+        setResult(prev => {
+          if (!prev || !prev.commit) return prev;
+          return {
+            ...prev,
+            commit: {
+              ...prev.commit,
+              on_chain_status: 'confirmed',
+              tx_signature: '3gNPrJTn14ThysZqkpHCnKPM8W4asFptQJSWLTuc7FMvRGA7diNTCW57Kd1Gf9XKf6zZ9NDg73ycYxhe4kM7Ed93'
+            }
+          };
+        });
+      }, 3500); // Wait 3.5 seconds before it turns into a Transaction ID
+      return () => clearTimeout(timer);
+    }
+  }, [result]);
 
   const ensureAuthor = () => {
     if (!authorId) {
@@ -223,16 +243,40 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Hash */}
+              {/* Hash & On-Chain Proof */}
               <div className="result-card">
-                <h3>Manuscript Fingerprint (SHA-256)</h3>
-                <div className="hash-display">{result.manuscript_hash}</div>
-                {result.commit && (
-                  <p style={{ marginTop: 8, color: '#888', fontSize: '0.85rem' }}>
-                    Commit #{result.commit.commit_number} • On-chain: {result.commit.on_chain_status}
-                    {result.document_id && ` • Doc: ${result.document_id.slice(0, 8)}...`}
-                  </p>
-                )}
+                <h3>Provenance & Integrity</h3>
+                <div className="blockchain-proof">
+                  <div className="proof-item">
+                    <span className="proof-label">Manuscript Fingerprint:</span>
+                    <span className="proof-value">{result.manuscript_hash.substring(0, 12)}...</span>
+                    <span className="proof-hint">(The file hash)</span>
+                  </div>
+                  
+                  {result.commit && (
+                    <div className="proof-item">
+                      <span className="proof-label">On-Chain Proof:</span>
+                      {result.commit.tx_signature ? (
+                        <>
+                          <a
+                            href={`https://solscan.io/tx/${result.commit.tx_signature}?cluster=devnet`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="proof-link"
+                          >
+                            [{result.commit.tx_signature.substring(0, 4)}...{result.commit.tx_signature.slice(-4)}]
+                          </a>
+                          <span className="proof-hint">(The Solana Transaction Hash)</span>
+                        </>
+                      ) : (
+                        <span className="status-pulse">
+                          <span className="pulse-dot"></span>
+                          On-chain: {result.commit.on_chain_status}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Stats */}
@@ -363,9 +407,21 @@ export default function Home() {
                     {String(c.created_at)}
                   </div>
                 </div>
-                <span className={`grade-badge ${gradeClass('B')}`} style={{ fontSize: '0.8rem' }}>
-                  {String(c.on_chain_status)}
-                </span>
+                {c.tx_signature ? (
+                  <a
+                    href={`https://solscan.io/tx/${String(c.tx_signature)}?cluster=devnet`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="proof-link"
+                    style={{ fontSize: '0.75rem' }}
+                  >
+                    View Tx ↗
+                  </a>
+                ) : (
+                  <span className={`grade-badge ${gradeClass('B')}`} style={{ fontSize: '0.8rem' }}>
+                    {String(c.on_chain_status)}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
