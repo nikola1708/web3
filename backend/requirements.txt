@@ -1,0 +1,20 @@
+fastapi
+uvicorn[standard]
+python-multipart
+python-docx
+PyPDF2
+pydantic
+aiofiles
+httpx
+pytest
+pytest-asyncio
+aiosqlite
+python-dotenv
+# Optional - uncomment for real AI detection (requires GPU recommended):
+# torch
+# transformers
+# Optional - uncomment for Solana on-chain integration:
+# anchorpy
+# solders
+# solana
+# base58

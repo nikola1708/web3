@@ -1,0 +1,228 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
+h2 { font-size: 1.3rem; margin: 20px 0 10px; color: #ccc; }
+.subtitle { color: #888; margin-bottom: 30px; }
+
+/* ── Upload ──────────────────────────────── */
+.upload-section {
+  background: #1a1a1a;
+  border: 2px dashed #333;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+.upload-section:hover { border-color: #555; }
+.upload-section.dragover { border-color: #7c3aed; background: #1a1a2e; }
+
+input[type="file"] { margin: 10px 0; }
+
+.form-group {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+.form-group input,
+.form-group textarea {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 14px;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #7c3aed;
+}
+
+/* ── Buttons ──────────────────────────────── */
+button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary { background: #7c3aed; color: white; }
+.btn-primary:hover { background: #6d28d9; }
+.btn-primary:disabled { background: #333; color: #666; cursor: not-allowed; }
+.btn-secondary { background: #222; color: #ccc; border: 1px solid #333; }
+.btn-secondary:hover { background: #2a2a2a; }
+
+/* ── Result Cards ────────────────────────── */
+.results { margin-top: 20px; }
+.result-card {
+  background: #1a1a1a;
+  border: 1px solid #252525;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.result-card h3 {
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ── Score ───────────────────────────────── */
+.score-display { display: flex; align-items: center; gap: 16px; margin: 10px 0; }
+.score-big { font-size: 3rem; font-weight: 700; }
+.grade-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.grade-a  { background: #064e3b; color: #34d399; }
+.grade-b  { background: #1e3a2f; color: #6ee7b7; }
+.grade-c  { background: #3b3a06; color: #fbbf24; }
+.grade-d  { background: #3b2506; color: #f59e0b; }
+.grade-e  { background: #3b1506; color: #ef4444; }
+.grade-f  { background: #450a0a; color: #f87171; }
+
+/* ── Stats Grid ──────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.stat-item { background: #111; padding: 12px; border-radius: 8px; text-align: center; }
+.stat-value { font-size: 1.4rem; font-weight: 700; color: #fff; }
+.stat-label { font-size: 0.75rem; color: #666; margin-top: 4px; text-transform: uppercase; }
+
+/* ── Hash ────────────────────────────────── */
+.hash-display {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #7c3aed;
+  background: #111;
+  padding: 10px;
+  border-radius: 6px;
+  word-break: break-all;
+}
+
+/* ── Commit History ──────────────────────── */
+.commit-list { list-style: none; }
+.commit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.commit-item:last-child { border-bottom: none; }
+.commit-number {
+  background: #222;
+  color: #7c3aed;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.commit-info { flex: 1; }
+.commit-msg  { color: #ccc; font-size: 0.9rem; }
+.commit-meta { color: #555; font-size: 0.75rem; }
+
+/* ── Verify ──────────────────────────────── */
+.verify-section { margin-top: 30px; }
+.verify-input { display: flex; gap: 10px; }
+.verify-input input {
+  flex: 1;
+  padding: 10px 14px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-family: monospace;
+}
+.verify-result { margin-top: 12px; padding: 16px; border-radius: 8px; }
+.verify-found     { background: #064e3b; border: 1px solid #065f46; }
+.verify-not-found { background: #1a1a1a; border: 1px solid #333; }
+
+/* ── Loading ─────────────────────────────── */
+.loading { display: flex; align-items: center; gap: 8px; color: #888; }
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #333;
+  border-top-color: #7c3aed;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Tabs ────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #222;
+}
+.tab {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+}
+.tab.active { color: #e0e0e0; border-bottom-color: #7c3aed; }
+.tab:hover  { color: #aaa; }
+
+/* ── Error ───────────────────────────────── */
+.error {
+  background: #450a0a;
+  border: 1px solid #7f1d1d;
+  color: #fca5a5;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* ── Linguistic Features Grid ────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.feature-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #111;
+  border-radius: 4px;
+}
+.feature-label { color: #888; }
+.feature-value { color: #e0e0e0; font-weight: 600; }
