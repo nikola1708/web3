@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("BuNNy1111111111111111111111111111111111111");
+declare_id!("4ATURpD3Aeq5FdnGDppFvdQG5xCaLStsopPrADJHK1nt");
 
 #[program]
 pub mod bunny_attestation {

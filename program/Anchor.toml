@@ -3,13 +3,13 @@ seeds = false
 skip-lint = false
 
 [programs.devnet]
-bunny_attestation = "BuNNy1111111111111111111111111111111111111"
+bunny_attestation = "4ATURpD3Aeq5FdnGDppFvdQG5xCaLStsopPrADJHK1nt"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

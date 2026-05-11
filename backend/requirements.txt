@@ -11,10 +11,10 @@ pytest-asyncio
 aiosqlite
 python-dotenv
 # Optional - uncomment for real AI detection (requires GPU recommended):
-# torch
-# transformers
+torch
+transformers
 # Optional - uncomment for Solana on-chain integration:
-# anchorpy
-# solders
-# solana
-# base58
+anchorpy
+solders
+solana
+base58
