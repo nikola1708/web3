@@ -5,7 +5,9 @@ A decentralized attestation layer for novelists.
 Run with: uvicorn main:app --reload --host 0.0.0.0 --port 8000
 """
 
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
+# pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database import init_db

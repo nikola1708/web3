@@ -10,7 +10,9 @@ import uuid
 import hashlib
 import tempfile
 
+# pyrefly: ignore [missing-import]
 import pytest
+# pyrefly: ignore [missing-import]
 from fastapi.testclient import TestClient
 
 # Add backend dir to path
