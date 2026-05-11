@@ -4,6 +4,30 @@ Proves human authorship by combining AI linguistic analysis with Proof of Proces
 
 ---
 
+## Core Concepts
+
+### 1. Humanity Score (A+ to F)
+Unlike basic AI detectors, Bunny calculates a weighted score based on two layers:
+- **Linguistic Layer (AI Engine)**: Uses `DeBERTa-v3` + custom heuristics (burstiness, vocabulary richness, etc.) to detect AI patterns.
+- **Temporal Layer (Proof of Process)**: Analyzes the *evolution* of your manuscript over time. It rewards natural editing intervals (hours/days) and gradual word count changes.
+
+### 2. Proof of Process (PoP)
+The system tracks "commits" of your manuscript. 
+- **First Upload**: Baseline score of 50.
+- **Subsequent Uploads**: Scores increase if the changes appear human (e.g., editing for 3 hours, adding 500 words).
+- **Suspicious Activity**: Pasting 10,000 words in 5 minutes will flag the "Temporal Score," even if the text itself looks human.
+
+### 3. Solana Relayer (Gasless)
+Bunny uses a **Relayer Architecture**. Writers do not need a Solana wallet or SOL to attest their work. The backend signs and pays for the on-chain fingerprinting, making the experience "web2-friendly" while maintaining web3 immutability.
+
+### 4. Privacy-First Fingerprinting
+Only the **SHA-256 hash** of your manuscript and your scores are stored on-chain. Your actual text never touches the blockchain.
+
+### 5. Demo & Simulations
+For demonstration purposes, the frontend includes a **3.5-second simulation** for on-chain confirmation. It will display a placeholder transaction signature if the backend relayer is not fully configured with a live Solana key.
+
+---
+
 ## Prerequisites
 
 - Python 3.10+
