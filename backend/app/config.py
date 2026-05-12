@@ -14,9 +14,9 @@ class Settings:
     USE_MOCK_MODEL: bool = os.getenv("USE_MOCK_MODEL", "true").lower() == "true"
     DATABASE_PATH: str = os.getenv("DATABASE_PATH", str(Path(__file__).parent.parent / "bunny.db"))
     HOST: str = os.getenv("HOST", "0.0.0.0")
-    PORT: int = int(os.getenv("PORT", "8000"))
+    PORT: int = int(os.getenv("PORT", "8080"))
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
-    CORS_ORIGINS: list = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8000").split(",")
+    CORS_ORIGINS: list = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080").split(",")
     MAX_FILE_SIZE_MB: int = int(os.getenv("MAX_FILE_SIZE_MB", "50"))
     ALLOWED_EXTENSIONS: set = {".docx", ".doc", ".md", ".pdf", ".txt"}
 

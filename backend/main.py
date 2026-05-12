@@ -2,7 +2,7 @@
 Bunny Backend - Main Application
 A decentralized attestation layer for novelists.
 
-Run with: uvicorn main:app --reload --host 0.0.0.0 --port 8000
+Run with: uvicorn main:app --reload --host 0.0.0.0 --port 8080
 """
 
 # pyrefly: ignore [missing-import]

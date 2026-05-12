@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-const API = 'http://localhost:8001';
+const API = '';
 
 type AnalysisResult = {
   manuscript_hash: string;
