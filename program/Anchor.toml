@@ -9,7 +9,7 @@ bunny_attestation = "4ATURpD3Aeq5FdnGDppFvdQG5xCaLStsopPrADJHK1nt"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
