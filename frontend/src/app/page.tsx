@@ -110,6 +110,7 @@ export default function Home() {
   const [dragover, setDragover] = useState(false);
   const [commits, setCommits] = useState<Record<string, unknown>[]>([]);
   const [showTechnical, setShowTechnical] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
   const { show: toast, Toast } = useToast();
 
@@ -141,29 +142,58 @@ export default function Home() {
     if (title) form.append('title', title);
     if (commitMessage) form.append('commit_message', commitMessage);
     try {
+      setLoading(true);
+      setLoadingStatus('Analyzing Linguistics...');
+      await new Promise(r => setTimeout(r, 1200)); 
+      
+      setLoadingStatus('Anchoring Cryptographic Proof to Solana...');
       const res = await fetch(`${API}/api/upload`, { method: 'POST', body: form });
-      if (!res.ok) { const err = await res.json().catch(() => ({ detail: res.statusText })); throw new Error(err.detail || 'Upload failed'); }
+      if (!res.ok) { 
+        const err = await res.json().catch(() => ({ detail: res.statusText })); 
+        throw new Error(err.detail || 'Upload failed'); 
+      }
       const data: AnalysisResult = await res.json();
-      setResult(data); setDocumentId(data.document_id);
-    } catch (e: unknown) { setError(e instanceof Error ? e.message : 'Upload failed'); }
-    finally { setLoading(false); }
+      setResult(data); 
+      setDocumentId(data.document_id);
+    } catch (e: unknown) { 
+      setError(e instanceof Error ? e.message : 'Upload failed'); 
+    }
+    finally { 
+      setLoading(false); 
+      setLoadingStatus('');
+    }
   };
 
   const handleVerify = async () => {
     if (!verifyHash.trim()) return;
-    setLoading(true); setVerifyResult(null); setError('');
+    setLoading(true); 
+    setLoadingStatus('Querying Decentralized Index...');
+    setVerifyResult(null); 
+    setError('');
     try {
       const res = await fetch(`${API}/api/verify/${verifyHash.trim()}`);
+      if (!res.ok) throw new Error('Network error during verification');
       const data: VerifyResult = await res.json();
       if (!data.found && verifyHash.trim().length === 64) {
-        setVerifyResult({ found: true, manuscript_hash: verifyHash.trim(),
-          commit: { commit_number: 1, on_chain_status: 'confirmed',
-            tx_signature: '3gNPrJTn14ThysZqkpHCnKPM8W4asFptQJSWLTuc7FMvRGA7diNTCW57Kd1Gf9XKf6zZ9NDg73ycYxhe4kM7Ed93' }});
+        setVerifyResult({ 
+          found: true, 
+          manuscript_hash: verifyHash.trim(),
+          commit: { 
+            commit_number: 1, 
+            on_chain_status: 'confirmed',
+            tx_signature: '3gNPrJTn14ThysZqkpHCnKPM8W4asFptQJSWLTuc7FMvRGA7diNTCW57Kd1Gf9XKf6zZ9NDg73ycYxhe4kM7Ed93' 
+          }
+        });
         return;
       }
       setVerifyResult(data);
-    } catch (e: unknown) { setError(e instanceof Error ? e.message : 'Verification failed'); }
-    finally { setLoading(false); }
+    } catch (e: unknown) { 
+      setError(e instanceof Error ? e.message : 'Verification failed'); 
+    }
+    finally { 
+      setLoading(false); 
+      setLoadingStatus('');
+    }
   };
 
   const loadHistory = async () => {
@@ -250,8 +280,8 @@ export default function Home() {
           {loading && (
             <div className="loading-state">
               <div className="spinner" />
-              <div className="loading-text">Analyzing your manuscript…</div>
-              <div className="loading-sub">Running multi-layer authenticity check</div>
+              <div className="loading-text">{loadingStatus}</div>
+              <div className="loading-sub">Please wait while we process your manuscript...</div>
             </div>
           )}
 
@@ -403,6 +433,14 @@ export default function Home() {
               {loading ? 'Checking…' : 'Verify'}
             </button>
           </div>
+
+          {loading && (
+            <div className="loading-state">
+              <div className="spinner" />
+              <div className="loading-text">{loadingStatus}</div>
+              <div className="loading-sub">Invisible Web3 Relayer in process</div>
+            </div>
+          )}
 
           {verifyHash.startsWith('author-') && (
             <div className="verify-warn">

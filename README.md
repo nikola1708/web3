@@ -11,6 +11,30 @@ Unlike basic AI detectors, Bunny calculates a weighted score based on two layers
 - **Linguistic Layer (AI Engine)**: Uses `DeBERTa-v3` + custom heuristics (burstiness, vocabulary richness, etc.) to detect AI patterns.
 - **Temporal Layer (Proof of Process)**: Analyzes the *evolution* of your manuscript over time. It rewards natural editing intervals (hours/days) and gradual word count changes.
 
+---
+
+## Technical Architecture (The Bridge)
+
+Bunny operates on an **"Invisible Web3"** principle. Writers focus on their work, while our backend relayer handles the complexities of the blockchain.
+
+```mermaid
+graph TD
+    A[Writer/Publisher UI] -- "1. Upload Manuscript" --> B[FastAPI Backend]
+    B -- "2. Analysis" --> C{Bunny Engine}
+    C -- "AI Score" --> D[Relayer Service]
+    C -- "Temporal Score" --> D
+    D -- "3. Anchor Call (PDA)" --> E[Solana Blockchain]
+    E -- "4. Digital Receipt" --> B
+    B -- "5. Transaction Link" --> A
+```
+
+### Engineering Flow
+1. **Manuscript Fingerprinting**: We generate a unique SHA-256 hash of every manuscript version.
+2. **Multi-Layer Analysis**: The backend runs linguistic heuristics and compares the new version against historical word-count/time deltas.
+3. **Automated Relaying**: If humanity thresholds are met, the FastAPI backend uses a server-side wallet (The Relayer) to sign and pay gas fees for a Solana transaction.
+4. **On-Chain PDA**: Data is stored in Program Derived Addresses (PDAs) on Solana, ensuring immutable proof of authorship without the user needing a wallet or SOL.
+
+
 ### 2. Proof of Process (PoP)
 The system tracks "commits" of your manuscript. 
 - **First Upload**: Baseline score of 50.
