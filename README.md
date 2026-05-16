@@ -1,5 +1,11 @@
 # Bunny — Decentralized Manuscript Attestation
 
+
+
+https://github.com/user-attachments/assets/e9fcbaa4-01a8-4745-92dc-529a6de669cd
+
+
+
 Proves human authorship by combining AI linguistic analysis with Proof of Process, anchored to Solana.
 
 ---
